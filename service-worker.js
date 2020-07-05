@@ -1,4 +1,4 @@
-const CACHE_NAME = "epl-today-v2.1";
+const CACHE_NAME = "epl-today-v2.2";
 let urlsToCache = [
   "/",
   "/manifest.json",
