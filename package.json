@@ -1,0 +1,14 @@
+{
+  "name": "epl-today",
+  "version": "1.0.0",
+  "description": "Aplikasi Informasi Liga Inggris",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "M. Irfa'ul Fadllillah",
+  "license": "ISC",
+  "dependencies": {
+    "web-push": "^3.4.4"
+  }
+}

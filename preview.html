@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>EPL Today</title>
+    <meta name="description" content="Daily EPL - Results, Fixtures, Data" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/materialize.min.css" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1a237e" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="image/favicon.png" type="image/png">
+  </head>
+  <body>
+       <!-- Navigasi -->
+        <nav class="indigo darken-4" role="navigation">
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo center" id="logo-container"><img src="/image/logo.png" alt="logo" width="150px"></a>
+                <a href="./index.html#teams" class="left">
+                <i class="material-icons">arrow_back</i>
+                </a>
+                <ul class="topnav right hide-on-med-and-down"></ul>
+                <ul class="sidenav" id="nav-mobile"></ul>
+            </div>
+        </nav>
+        <!-- Akhir Navigasi -->
+        <div class="preloader-background">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="body-content">
+            <div id="header"></div>
+            <div class="col l12 m12 s12">
+                <div class="card">
+                    <div class="card-content center pink accent-3 white-text">
+                        <h5>Squad List</h5>
+                    </div> 
+                    <div class="card-action indigo darken-4 white-text">
+                        <table class="highlight">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Position</th>
+                                </tr>
+                            </thead>
+                            <tbody id="squadList"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/materialize.min.js"></script>
+        <script src="js/api.js"></script>
+        <script src="js/cache-api.js"></script>
+        <script src="main-js/preview.js"></script>
+  </body>
+</html>
