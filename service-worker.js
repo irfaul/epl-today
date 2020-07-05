@@ -1,4 +1,4 @@
-const CACHE_NAME = "epl-today-v1.9";
+const CACHE_NAME = "epl-today-v2";
 let urlsToCache = [
   "/",
   "/manifest.json",
@@ -22,7 +22,7 @@ let urlsToCache = [
   "/main-js/index.js",
   "/main-js/details.js",
   "/main-js/preview.js",
-  "/image/logo.png",
+  "/image/logo.webp",
   "/image/header-badge.webp",
   "/image/home-banner-1.webp",
   "/image/home-banner-2.webp",
