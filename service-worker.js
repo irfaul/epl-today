@@ -23,16 +23,15 @@ let urlsToCache = [
   "/main-js/details.js",
   "/main-js/preview.js",
   "/image/logo.png",
-  "/image/header-badge.jpg",
-  "/image/home-banner-1.jpg",
-  "/image/home-banner-2.jpg",
-  "/image/home-banner-3.jpg",
+  "/image/header-badge.webp",
+  "/image/home-banner-1.webp",
+  "/image/home-banner-2.webp",
+  "/image/home-banner-3.webp",
   "/image/icon-192x192.png",
   "/image/icon-512x512.png",
   "/image/favicon.png",
   "https://fonts.googleapis.com/css2?family=Quicksand&display=swap",
-  "https://fonts.googleapis.com/icon?family=Material+Icons",
-  "https://fonts.gstatic.com/s/materialicons/v53/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2",
+  "https://fonts.googleapis.com/icon?family=Material+Icons"
 ];
  
 self.addEventListener('install', event => {
