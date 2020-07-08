@@ -1,86 +1,61 @@
-const CACHE_NAME = "epl-today-v2.4";
-let urlsToCache = [
-  "/",
-  "/manifest.json",
-  "/nav.html",
-  "/index.html",
-  "/preview.html",
-  "/details.html",
-  "/pages/home.html",
-  "/pages/standings.html",
-  "/pages/scorer.html",
-  "/pages/teams.html",
-  "/pages/saved.html",
-  "/css/materialize.min.css",
-  "/css/style.css",
-  "/js/materialize.min.js",
-  "/js/nav.js",
-  "/js/api.js",
-  "/js/data.js",
-  "/js/idb.js",
-  "/js/db.js",
-  "/main-js/index.js",
-  "/main-js/details.js",
-  "/main-js/preview.js",
-  "/image/logo.webp",
-  "/image/header-badge.webp",
-  "/image/home-banner-1.webp",
-  "/image/home-banner-2.webp",
-  "/image/home-banner-3.webp",
-  "/image/icon-192x192.png",
-  "/image/icon-512x512.png",
-  "/image/favicon.png",
-  "https://fonts.googleapis.com/css2?family=Quicksand&display=swap",
-  "https://fonts.googleapis.com/icon?family=Material+Icons"
-];
- 
-self.addEventListener('install', event => {
-  event.waitUntil(
-      caches.open(CACHE_NAME).then(cache => {
-          return cache.addAll((urlsToCache))
-              .then(() => self.skipWaiting());
-      })
-  );
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
+
+if (workbox) {
+    console.log(`Workbox berhasil dimuat`);
+} else {
+    console.log(`Workbox gagal dimuat`);
+}
+
+workbox.precaching.precacheAndRoute([
+    { url: '/manifest.json', revision: '2' },
+    { url: '/nav.html', revision: '2' },
+    { url: '/index.html', revision: '2' },
+    { url: '/preview.html', revision: '2' },
+    { url: '/details.html', revision: '2' },
+    { url: '/css/style.css', revision: '2' },
+    { url: '/css/font.css', revision: '2' },
+    { url: '/css/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2', revision: '2' },
+    { url: '/css/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkP8o58a-wjw3UD0.woff2', revision: '2' },
+    { url: '/css/materialize.min.css', revision: '2' },
+    { url: '/js/materialize.min.js', revision: '2' },
+    { url: '/js/nav.js', revision: '2' },
+    { url: '/js/api.js', revision: '2' },
+    { url: '/js/data.js', revision: '2' },
+    { url: '/js/idb.js', revision: '2' },
+    { url: '/js/db.js', revision: '2' },
+    { url: '/main-js/index.js', revision: '2' },
+    { url: '/main-js/details.js', revision: '2' },
+    { url: '/main-js/preview.js', revision: '2' },
+], {
+    ignoreUrlParametersMatching: [/.*/]
 });
 
-self.addEventListener("fetch", function(event) {
-  const base_url = "https://api.football-data.org/v2/";
+workbox.routing.registerRoute(
+    /\.(?:png|webp|jpg|jpeg|svg)$/,
+    workbox.strategies.cacheFirst({
+        cacheName: 'image-cache',
+        plugins: [
+            new workbox.expiration.Plugin({
+                maxEntries: 60,
+                maxAgeSeconds: 2592000, // 30 hari
+            }),
+        ],
+    }),
+);
 
-  if (event.request.url.indexOf(base_url) > -1) {
-    event.respondWith(
-      caches.open(CACHE_NAME).then(function(cache) {
-        return fetch(event.request).then(function(response) {
-          cache.put(event.request.url, response.clone());
-          return response;
-        })
-      })
-    );
-  } else {
-    event.respondWith(
-      caches.match(event.request, {ignoreSearch : true}).then(function(response) {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
-    )
-  }
-});
+workbox.routing.registerRoute(
+    new RegExp('/pages/'),
+    workbox.strategies.staleWhileRevalidate({
+        cacheName: 'pages'
+    })
+);
 
-self.addEventListener("activate", function(event) {
-    event.waitUntil(
-      caches.keys().then(function(cacheNames) {
-        return Promise.all(
-          cacheNames.map(function(cacheName) {
-            if (cacheName != CACHE_NAME) {
-              console.log("ServiceWorker: cache " + cacheName + " dihapus");
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      })
-    );
-});
+workbox.routing.registerRoute(
+    new RegExp('https://api.football-data.org/v2/'),
+    workbox.strategies.staleWhileRevalidate({
+        cacheName: 'api-src'
+    })
+);
 
 self.addEventListener('push', function(event) {
     let body;
