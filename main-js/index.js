@@ -1,3 +1,5 @@
+import nav from '../js/nav.js';
+
 // Cek SERVICEWORKER
 if (!('serviceWorker' in navigator)) {
     console.log("Service worker tidak didukung browser ini.");
@@ -62,8 +64,18 @@ if (!('serviceWorker' in navigator)) {
 
   // REQUEST API UNTUK PERTAMA KALI
   document.addEventListener("DOMContentLoaded", function() {
-      let preload = document.querySelector(".preloader-background");
-          setTimeout(function(){
-          preload.style.display = 'none';
-      },1500);
-    });
+    let preload = document.querySelector(".preloader-background");
+      setTimeout(function(){
+      preload.style.display = 'none';
+    },1500);
+
+      // Activate sidebar nav
+    const elems = document.querySelectorAll(".sidenav");
+    let page = window.location.hash.substr(1);
+
+    M.Sidenav.init(elems);
+    nav.loadNav();
+
+    if (page === "") page = "home";
+    nav.loadPage(page);
+});

@@ -1,3 +1,6 @@
+import api from '../js/api.js';
+import db from '../js/db.js';
+
 // REGISTER SERVICE WORKER
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function() {
@@ -39,18 +42,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
         // ambil artikel lalu tampilkan
-        let list = getSavedMatchById();
+        let list = api.getSavedMatchById();
         actionBtn.onclick = function() {
-        console.log("Tombol delete di klik.");
-        M.toast({html: 'Match has been deleted from watchlist', 
-        completeCallback : () => {
-            location.href = './index.html#saved'
+            M.toast({html: 'Match has been deleted from watchlist', 
+            completeCallback : () => {
+                location.href = './index.html#saved'
             }
-        })
-        list.then(function (deleteWatchList) {
-            deleteWatchLater(deleteWatchList);
-        });
-    }
+            })
+            list.then(function (deleteWatchList) {
+                db.deleteWatchLater(deleteWatchList);
+            });
+        }
     } else {
         delIcon.style.display = 'none';
 
@@ -59,15 +61,14 @@ document.addEventListener("DOMContentLoaded", function() {
             location.href = './index.html';
         }
 
-        let item = getMatchById();
+        let item = api.getMatchById();
         actionBtn.onclick = function() {
             actionBtn.style.display = 'none';
-        console.log("Tombol FAB di klik.");
-        M.toast({html: 'Match has been saved to watchlist'})
-        item.then(function (addedWatchList) {
-            addWatchLater(addedWatchList);
-        });
-        
-    }
+            M.toast({html: 'Match has been saved to watchlist'})
+            
+            item.then(function (addedWatchList) {
+                db.addWatchLater(addedWatchList);
+            });   
+        }
     }
 });

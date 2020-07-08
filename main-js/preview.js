@@ -1,3 +1,4 @@
+import api from '../js/api.js';
 // REGISTER SERVICE WORKER
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function() {
@@ -13,11 +14,11 @@ if ("serviceWorker" in navigator) {
 } else {
     console.log("ServiceWorker belum didukung browser ini.");
 }
+
 document.addEventListener("DOMContentLoaded", function() {
     let preload = document.querySelector(".preloader-background");
         setTimeout(function(){
         preload.style.display = 'none';
     },1500);
-    getTeamsById();
-    cacheGetTeamsById();
+    api.getTeamsById();
 });

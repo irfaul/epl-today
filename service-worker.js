@@ -1,4 +1,4 @@
-const CACHE_NAME = "epl-today-v2.2";
+const CACHE_NAME = "epl-today-v2.4";
 let urlsToCache = [
   "/",
   "/manifest.json",
@@ -16,7 +16,7 @@ let urlsToCache = [
   "/js/materialize.min.js",
   "/js/nav.js",
   "/js/api.js",
-  "/js/cache-api.js",
+  "/js/data.js",
   "/js/idb.js",
   "/js/db.js",
   "/main-js/index.js",

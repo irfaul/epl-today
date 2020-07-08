@@ -1,3 +1,5 @@
+import idb from './idb.js';
+
 const dbPromised = idb.open("epl-today", 1, function(upgradeDb) {
     const watchesObjectStore = upgradeDb.createObjectStore("matches", {
       keyPath: "id"
@@ -19,7 +21,7 @@ const addWatchLater = addedWatchList => {
 }
 
 const getAll = () => {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve) {
       dbPromised
         .then(db => {
           var tx = db.transaction("matches", "readonly");
@@ -33,7 +35,7 @@ const getAll = () => {
 }
 
 const getById = id => {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve) {
       dbPromised
         .then( db => {
           var tx = db.transaction("matches", "readonly");
@@ -60,3 +62,10 @@ const deleteWatchLater = deleteWatchList => {
         console.log("Item deleted");
       });
 }
+
+export default {
+  addWatchLater,
+  getAll,
+  getById,
+  deleteWatchLater
+};
