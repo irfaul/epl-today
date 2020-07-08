@@ -66,14 +66,4 @@ if (!('serviceWorker' in navigator)) {
           setTimeout(function(){
           preload.style.display = 'none';
       },1500);
-      getScorers();
-      cacheGetScorers();
-      getStandings();
-      cacheGetStandings();
-      getTeams();
-      cacheGetTeams();
-      getMatch();
-      cacheGetMatch();
-      getMatchData();
-      cacheGetMatchData();
     });
